@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Attendify | Student Attendance</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <aside class="sidebar">
+    <h2>Attendify<span>.</span></h2>
+    <p class="nav-label">WORKSPACE</p>
+    <a class="active" href="#dashboard">▦ Dashboard</a>
+    <a href="#students">♙ Students</a>
+    <a href="#attendance">✓ Attendance</a>
+    <a href="#reports">▤ Reports</a>
+    <div class="sidebar-bottom">Student Attendance<br>Management System</div>
+  </aside>
+
+  <main class="main" id="dashboard">
+    <header class="topbar">
+      <div>
+        <p class="muted">ACADEMIC MANAGEMENT</p>
+        <h1>Attendance Dashboard</h1>
+      </div>
+      <div class="today" id="today"></div>
+    </header>
+
+    <section class="stats">
+      <article class="stat">
+        <p>Total Students</p>
+        <h2 id="totalStudents">0</h2>
+        <span>Registered students</span>
+      </article>
+      <article class="stat">
+        <p>Periods Per Day</p>
+        <h2>07</h2>
+        <span>Attendance sessions</span>
+      </article>
+      <article class="stat">
+        <p>Selected Date</p>
+        <h2 id="selectedDateLabel">—</h2>
+        <span>Attendance schedule</span>
+      </article>
+      <article class="stat">
+        <p>Low Attendance</p>
+        <h2 id="lowAttendance">0</h2>
+        <span>Below 75%</span>
+      </article>
+    </section>
+
+    <section class="panel" id="students">
+      <div class="section-heading">
+        <div>
+          <p class="muted">CLASS DIRECTORY</p>
+          <h2>Student Management</h2>
+        </div>
+      </div>
+
+      <form id="studentForm" class="student-form">
+        <input id="roll" placeholder="Roll number" required>
+        <input id="name" placeholder="Student name" required>
+        <input id="department" placeholder="Department" required>
+        <button type="submit">+ Add Student</button>
+      </form>
+      <p id="studentMessage" class="message"></p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Roll Number</th>
+              <th>Student Name</th>
+              <th>Department</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="studentRows"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="panel" id="attendance">
+      <div class="section-heading">
+        <div>
+          <p class="muted">DAILY RECORD</p>
+          <h2>Mark Attendance</h2>
+        </div>
+        <label class="date-label">
+          Attendance date
+          <input type="date" id="attendanceDate" required>
+        </label>
+      </div>
+
+      <div class="toolbar">
+        <button type="button" class="secondary" id="loadAttendance">Load Date</button>
+        <button type="button" class="secondary" id="allPresent">Mark All Present</button>
+        <button type="button" class="secondary" id="allAbsent">Mark All Absent</button>
+        <button type="button" id="saveAttendance">Save Attendance</button>
+      </div>
+
+      <p class="muted">Select Present or Absent for each working period. Unselected periods will not be recorded.</p>
+
+      <div class="table-wrap">
+        <table class="attendance-table">
+          <thead id="attendanceHead"></thead>
+          <tbody id="attendanceRows"></tbody>
+        </table>
+      </div>
+      <p id="attendanceMessage" class="message"></p>
+    </section>
+
+    <section class="panel" id="reports">
+      <div class="section-heading">
+        <div>
+          <p class="muted">MONTHLY ANALYTICS</p>
+          <h2>Attendance Reports</h2>
+        </div>
+        <div class="report-controls">
+          <input type="month" id="reportMonth">
+          <button type="button" id="loadReport">Generate Report</button>
+          <button type="button" class="secondary" id="exportCsv">Export CSV</button>
+        </div>
+      </div>
+      <p class="muted">Attendance percentage and low-attendance alerts.</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Roll No.</th>
+              <th>Name</th>
+              <th>Working Periods</th>
+              <th>Present</th>
+              <th>Absent</th>
+              <th>Attendance</th>
+              <th>Status</th>
+              <th>Individual</th>
+            </tr>
+          </thead>
+          <tbody id="reportRows"></tbody>
+        </table>
+      </div>
+      <p id="reportMessage" class="message"></p>
+    </section>
+
+    <footer>Attendify · Student Attendance Management System</footer>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
