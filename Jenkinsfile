@@ -2,6 +2,11 @@
 pipeline {
     agent any
 
+    environment {
+        DOCKER_HOST = 'tcp://host.docker.internal:2375'
+        IMAGE_NAME = 'student-attendance-system'
+    }
+
     stages {
         stage('Checkout') {
             steps {
@@ -28,14 +33,21 @@ pipeline {
                 sh 'node --check public/app.js'
             }
         }
+
+        stage('Build Docker Image') {
+            steps {
+                sh 'docker build -t student-attendance-system:${BUILD_NUMBER} .'
+                sh 'docker images student-attendance-system'
+            }
+        }
     }
 
     post {
         success {
-            echo 'Student Attendance CI completed successfully!'
+            echo 'CI and Docker image build completed successfully!'
         }
         failure {
-            echo 'CI failed. Check the console output.'
+            echo 'Pipeline failed. Check Console Output.'
         }
     }
 }
