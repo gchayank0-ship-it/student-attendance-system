@@ -1,0 +1,25 @@
+name: Build Student Attendance Docker Image
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Build Docker image
+        run: docker build -t student-attendance:latest .
+
+      - name: Save Docker image
+        run: docker save student-attendance:latest -o student-attendance.tar
+
+      - name: Upload Docker image artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: student-attendance-docker-image
+          path: student-attendance.tar
